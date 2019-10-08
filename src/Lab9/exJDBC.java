@@ -1,6 +1,8 @@
 package Lab9;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class exJDBC {
     public static void main(String[] args) throws ClassNotFoundException {
@@ -22,15 +24,29 @@ public class exJDBC {
             ResultSet rs = stmt.executeQuery(sql);
 
             //step4
+            ArrayList<User> myList = new ArrayList<User>();
             while (rs.next()) {
-                System.out.println("-------------------------------");
-                System.out.println("ID: "+rs.getString(1));
-                System.out.println("Name: "+rs.getString(2));
-                System.out.println("Address: "+rs.getString(3));
-                System.out.println("Tel.: "+rs.getString(4));
-                System.out.println("-------------------------------");
+//                System.out.println("-------------------------------");
+//                System.out.println("ID: "+rs.getString(1));
+//                System.out.println("Name: "+rs.getString(2));
+//                System.out.println("Address: "+rs.getString(3));
+//                System.out.println("Tel.: "+rs.getString(4));
+//                System.out.println("-------------------------------");
+
+                User myUser = new User(rs.getString(1),
+                        rs.getString(2), rs.getString(3), rs.getString(4));
+                myList.add(myUser);
+
+            }//while
+
+            for (User u:myList) {
+                System.out.println(u.toString());
             }
+
             //step5
+
+
+
             rs.close();
             stmt.close();
             conn.close();
